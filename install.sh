@@ -1,4 +1,4 @@
-#!/bin/expect
+#!/usr/bin/expect
 
   password="666"
 

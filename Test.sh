@@ -1,19 +1,4 @@
-#!/bin/expect
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#!/usr/bin/expect
 
 
 
@@ -23,8 +8,6 @@
 auto_authorization() {
 
   expect -c "
-      set timeout 10
-      spawn sudo ls
       expect {
         "*assword:" {send 666\r}
       }
@@ -32,4 +15,17 @@ auto_authorization() {
   "
 }
 
-auto_authorization
+
+passwordAlert() {
+  spawn sudo [lindex $argv 1]
+  set password [lindex $argv 2]
+  expect "*password:"
+  send "$password\r"
+  expect "*password:"
+  send "$password\r"
+  expect eof
+}
+
+
+
+passwordAlert
