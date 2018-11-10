@@ -8,6 +8,8 @@
 
     gem list | grep cocoapods >/dev/null
     if [[ $? -ne 0 ]]; then
+
+        echo "----------------cocoapods 安装中....--------------"
         sudo gem install cocoapods
         echo "----------------cocoapods 安装完成----------------"
 
@@ -23,6 +25,9 @@
   installHomebrew() {
      	brew --version >/dev/null
       if [[ $? -ne 0 ]]; then
+
+          echo "----------------Homebrew 安装中......------------"
+
           /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
           echo "----------------Homebrew 安装完成----------------"
@@ -33,6 +38,9 @@
   installOhmyzsh() {
     ls -la ~/ | grep .zshrc >/dev/null
     if [[ $? -ne 0 ]]; then
+
+        echo "----------------oh-my-zsh 安装中....----------------"
+
         sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
         # 修改style
