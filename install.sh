@@ -36,39 +36,37 @@
 
   # 安装oh-my-zsh
   installOhmyzsh() {
-    ls -la ~/ | grep .zshrc >/dev/null
+    ls -la ~/ | grep .oh-my-zsh >/dev/null
     if [[ $? -ne 0 ]]; then
 
         echo "----------------oh-my-zsh 安装中....----------------"
 
         sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-        # 修改style
-        ZSH_THEME=cat ~/.zshrc | grep "ZSH_THEME=\"*\""
-        sed -i "" "s/$ZSH_THEME/ZSH_THEME="ys"" ~/.zshrc
-
-        # 直接生效
-        source ~/.zshrc
-
         echo "----------------oh-my-zsh 安装完成----------------"
+
     fi
   }
 
-  # 自动授权
-  auto_authorization() {
-    expect -c "
-      set timeout 10
+  modify_oh_my_zsh_theme() {
 
-      expect {
-          \"yes/no\" {send yes\r; expect "*assword" send {$password\r}}
-          \"password\" {send $password\r}
-      }
-      expect eof
-    "
+    ls -la ~/ | grep .oh-my-zsh >/dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "----------------oh-my-zsh 设置主题中...----------------"
+      # 修改style
+      ZSH_THEME=`cat ~/.zshrc | grep "ZSH_THEME=\"*\""`
+      sed -i "" "s/$ZSH_THEME/ZSH_THEME="ys"" ~/.zshrc
+
+      # 直接生效
+      source ~/.zshrc
+      echo "----------------oh-my-zsh 修改主题----------------"
+
+    fi
   }
 
 main() {
   installOhmyzsh
+  modify_oh_my_zsh_theme
   installCocoapods
   installHomebrew
 }
